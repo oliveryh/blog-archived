@@ -3,5 +3,12 @@
         <title>Categories - Category - oliver.yh</title>
         <link>/categories/</link>
         <description>Categories - Category - oliver.yh</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="/categories/" rel="self" type="application/rss+xml" /></channel>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 09 May 2020 22:44:32 &#43;0100</lastBuildDate><atom:link href="/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Musings</title>
+    <link>/categories/musings/</link>
+    <pubDate>Sat, 09 May 2020 22:44:32 &#43;0100</pubDate>
+    <author>Author</author>
+    <guid>/categories/musings/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
 </rss>

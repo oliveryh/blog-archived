@@ -9,7 +9,9 @@
     <pubDate>Sat, 09 May 2020 22:44:32 &#43;0100</pubDate>
     <author>Author</author>
     <guid>/posts/hello-world/</guid>
-    <description><![CDATA[Welcome to the Blog Welcome to my new blog. I&rsquo;ve decided to write this blog as a creative outlet for all the things I&rsquo;m up to at the moment. In doing so, hopefully I can help others to explore similar interests with me, or help them out along the way.
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/posts/hello-world/header_image.png" referrerpolicy="no-referrer">
+            </div>Welcome to the Blog Welcome to my new blog. I&rsquo;ve decided to write this blog as a creative outlet for all the things I&rsquo;m up to at the moment. In doing so, hopefully I can help others to explore similar interests with me, or help them out along the way.
 Thank you for taking a look.]]></description>
 </item></channel>
 </rss>
