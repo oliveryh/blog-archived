@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - Tag - oliver.yh</title>
+        <link>/tags/</link>
+        <description>Tags - Tag - oliver.yh</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 09 May 2020 22:44:32 &#43;0100</lastBuildDate><atom:link href="/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>docker</title>
+    <link>/tags/docker/</link>
+    <pubDate>Sat, 09 May 2020 22:44:32 &#43;0100</pubDate>
+    <author>Author</author>
+    <guid>/tags/docker/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>lifestyle</title>
+    <link>/tags/lifestyle/</link>
+    <pubDate>Sat, 09 May 2020 22:44:32 &#43;0100</pubDate>
+    <author>Author</author>
+    <guid>/tags/lifestyle/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
+</rss>
