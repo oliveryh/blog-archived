@@ -3,8 +3,29 @@
         <title>Tags - Tag - oliver.yh</title>
         <link>/tags/</link>
         <description>Tags - Tag - oliver.yh</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 09 May 2020 22:44:32 &#43;0100</lastBuildDate><atom:link href="/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>Blog</title>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 May 2020 21:48:47 &#43;0100</lastBuildDate><atom:link href="/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>plotly</title>
+    <link>/tags/plotly/</link>
+    <pubDate>Mon, 11 May 2020 21:48:47 &#43;0100</pubDate>
+    <author>Author</author>
+    <guid>/tags/plotly/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>python</title>
+    <link>/tags/python/</link>
+    <pubDate>Mon, 11 May 2020 21:48:47 &#43;0100</pubDate>
+    <author>Author</author>
+    <guid>/tags/python/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>visualisation</title>
+    <link>/tags/visualisation/</link>
+    <pubDate>Mon, 11 May 2020 21:48:47 &#43;0100</pubDate>
+    <author>Author</author>
+    <guid>/tags/visualisation/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>blog</title>
     <link>/tags/blog/</link>
     <pubDate>Sat, 09 May 2020 22:44:32 &#43;0100</pubDate>
     <author>Author</author>

@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Blog - Tag - oliver.yh</title>
+        <title>blog - Tag - oliver.yh</title>
         <link>/tags/blog/</link>
-        <description>Blog - Tag - oliver.yh</description>
+        <description>blog - Tag - oliver.yh</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 09 May 2020 22:44:32 &#43;0100</lastBuildDate><atom:link href="/tags/blog/" rel="self" type="application/rss+xml" /><item>
     <title>Hello World!</title>
     <link>/posts/hello-world/</link>
@@ -10,8 +10,8 @@
     <author>Author</author>
     <guid>/posts/hello-world/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/posts/hello-world/header_image.png" referrerpolicy="no-referrer">
-            </div>Welcome to the Blog Welcome to my new blog. I&rsquo;ve decided to write this blog as a creative outlet for all the things I&rsquo;m up to at the moment. In doing so, hopefully I can help others to explore similar interests with me, or help them out along the way.
+                <img src="/posts/2020-05-09_hello-world/header_image.png" referrerpolicy="no-referrer">
+            </div>Welcome to my new blog. I&rsquo;ve decided to write this blog as a creative outlet for all the things I&rsquo;m up to at the moment. In doing so, hopefully I can help others to explore similar interests with me, or help them out along the way.
 Thank you for taking a look.]]></description>
 </item></channel>
 </rss>

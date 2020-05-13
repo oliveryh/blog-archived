@@ -3,7 +3,14 @@
         <title>Categories - Category - oliver.yh</title>
         <link>/categories/</link>
         <description>Categories - Category - oliver.yh</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 09 May 2020 22:44:32 &#43;0100</lastBuildDate><atom:link href="/categories/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 May 2020 21:48:47 &#43;0100</lastBuildDate><atom:link href="/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Software Engineering</title>
+    <link>/categories/software-engineering/</link>
+    <pubDate>Mon, 11 May 2020 21:48:47 &#43;0100</pubDate>
+    <author>Author</author>
+    <guid>/categories/software-engineering/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>Musings</title>
     <link>/categories/musings/</link>
     <pubDate>Sat, 09 May 2020 22:44:32 &#43;0100</pubDate>
