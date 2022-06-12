@@ -1,604 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noodp" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Youtube History Visualisation in Plotly - oliver.yh</title>
-        <meta name="Description" content=""><meta property="og:title" content="Youtube History Visualisation in Plotly" />
-<meta property="og:description" content="The following learning project is intended to help me learn concepts around the steps required to create a visualisation in python, but also explore the kind of information that is stored by companies such as YouTube (Google).
-Objectives  Data Preparation: Data preparation makes up ~80% of the work in a Data Science pipeline. I&rsquo;d like to explore the best techniques to go from raw CSV data, to a tabular format that is ready for data visualisation." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/youtube-history-visualisation-in-plotly/" />
-<meta property="article:published_time" content="2020-05-11T21:48:47+01:00" />
-<meta property="article:modified_time" content="2020-05-11T21:48:47+01:00" />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Youtube History Visualisation in Plotly"/>
-<meta name="twitter:description" content="The following learning project is intended to help me learn concepts around the steps required to create a visualisation in python, but also explore the kind of information that is stored by companies such as YouTube (Google).
-Objectives  Data Preparation: Data preparation makes up ~80% of the work in a Data Science pipeline. I&rsquo;d like to explore the best techniques to go from raw CSV data, to a tabular format that is ready for data visualisation."/>
-<meta name="application-name" content="oliver.yh">
-<meta name="apple-mobile-web-app-title" content="oliver.yh"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/youtube-history-visualisation-in-plotly/" /><link rel="prev" href="/posts/hello-world/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "Youtube History Visualisation in Plotly",
-        "inLanguage": "en",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "\/posts\/youtube-history-visualisation-in-plotly\/"
-        },"genre": "posts","keywords": "python, visualisation, plotly","wordcount":  2532 ,
-        "url": "\/posts\/youtube-history-visualisation-in-plotly\/","datePublished": "2020-05-11T21:48:47+01:00","dateModified": "2020-05-11T21:48:47+01:00","author": {
-                "@type": "Person",
-                "name": "Author"
-            },"description": ""
-    }
-    </script></head>
-    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Youtube History Visualisation in Plotly - oliver.yh</title><meta name=Description content><meta property="og:title" content="Youtube History Visualisation in Plotly"><meta property="og:description" content="The following learning project is intended to help me learn concepts around the steps required to create a visualisation in python, but also explore the kind of information that is stored by companies such as YouTube (Google).
+Objectives  Data Preparation: Data preparation makes up ~80% of the work in a Data Science pipeline. I&rsquo;d like to explore the best techniques to go from raw CSV data, to a tabular format that is ready for data visualisation."><meta property="og:type" content="article"><meta property="og:url" content="/posts/youtube-history-visualisation-in-plotly/"><meta property="article:published_time" content="2020-05-11T21:48:47+01:00"><meta property="article:modified_time" content="2020-05-11T21:48:47+01:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Youtube History Visualisation in Plotly"><meta name=twitter:description content="The following learning project is intended to help me learn concepts around the steps required to create a visualisation in python, but also explore the kind of information that is stored by companies such as YouTube (Google).
+Objectives  Data Preparation: Data preparation makes up ~80% of the work in a Data Science pipeline. I&rsquo;d like to explore the best techniques to go from raw CSV data, to a tabular format that is ready for data visualisation."><meta name=application-name content="oliver.yh"><meta name=apple-mobile-web-app-title content="oliver.yh"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=/posts/youtube-history-visualisation-in-plotly/><link rel=prev href=/posts/hello-world/><link rel=next href=/posts/github-review-visualisation-with-cytoscapejs/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Youtube History Visualisation in Plotly","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"\/posts\/youtube-history-visualisation-in-plotly\/"},"genre":"posts","keywords":"python, visualisation, plotly","wordcount":2532,"url":"\/posts\/youtube-history-visualisation-in-plotly\/","datePublished":"2020-05-11T21:48:47+01:00","dateModified":"2020-05-11T21:48:47+01:00","author":{"@type":"Person","name":"Author"},"description":""}</script></head><body><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':(''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark'))&&document.body.setAttribute('theme','dark');</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=oliver.yh><span class=header-title-pre><img src=/black-on-white-256x256.png style=vertical-align:middle;margin-right:8px;margin-bottom:4px;height:32px alt="Italian Trulli"></span>oliver.yh</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>Posts </a><a class=menu-item href=/tags/>Tags </a><a class=menu-item href=/categories/>Categories </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme"><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=oliver.yh><span class=header-title-pre><img src=/black-on-white-256x256.png style=vertical-align:middle;margin-right:8px;margin-bottom:4px;height:32px alt="Italian Trulli"></span>oliver.yh</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/>Posts</a><a class=menu-item href=/tags/>Tags</a><a class=menu-item href=/categories/>Categories</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class=single-title>Youtube History Visualisation in Plotly</h1><div class=post-meta><div class=post-meta-line><span class=post-category><a href=/categories/software-engineering/><i class="far fa-folder fa-fw"></i>&nbsp;Software Engineering</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-05-11>2020-05-11</time>&nbsp;
+<i class="far fa-clock fa-fw"></i>12 min&nbsp;</div></div><div class=featured-image><img class=lazyload src=/svg/loading/normal.min.svg data-src=/posts/2020-05-12_youtube-history-visualisation/header_image.png data-srcset="/posts/2020-05-12_youtube-history-visualisation/header_image.png, /posts/2020-05-12_youtube-history-visualisation/header_image.png 1.5x, /posts/2020-05-12_youtube-history-visualisation/header_image.png 2x" data-sizes=auto alt=/posts/2020-05-12_youtube-history-visualisation/header_image.png title=/posts/2020-05-12_youtube-history-visualisation/header_image.png></div><div class="details toc" id=toc-static><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#objectives>Objectives</a></li><li><a href=#preprocessing>Preprocessing</a><ul><li><a href=#getting-access-to-youtube-data>Getting access to YouTube Data</a></li><li><a href=#data-preparation>Data Preparation</a></li><li><a href=#feature-engineering>Feature Engineering</a></li></ul></li><li><a href=#visualisation>Visualisation</a></li><li><a href=#conclusion>Conclusion</a></li></ul></nav></div></div><div class=content id=content><p>The following learning project is intended to help me learn concepts around the steps required to create a visualisation in python, but also explore the kind of information that is stored by companies such as YouTube (Google).</p><h2 id=objectives>Objectives</h2><ul><li><strong>Data Preparation:</strong> Data preparation makes up ~80% of the work in a Data Science pipeline. I&rsquo;d like to explore the best techniques to go from raw CSV data, to a tabular format that is ready for data visualisation.</li><li><strong>Plot:</strong> There are various modules that can be used to plot the data. I&rsquo;ll consider which is best for this use case, and find the best way to represent the data in hand.</li><li><strong>Web Display:</strong> In order to display this project, what is the best way to allow users to upload their YouTube data and display the visualisation such that is can be deployed on a server with minimal effort to others.</li></ul><h2 id=preprocessing>Preprocessing</h2><h3 id=getting-access-to-youtube-data>Getting access to YouTube Data</h3><p>YouTube depricated their history API due to privacy reasons a few years ago, however it&rsquo;s possible to download a copy of your YouTube history in a JSON format by doing the following:</p><ol><li>Go to <a href=https://takeout.google.com/ target=_blank rel="noopener noreffer">Google Takeout</a></li><li>Deselect All</li><li>Select YouTube</li><li>Underneath YouTube, click on &ldquo;All YouTube Data Included&rdquo;</li><li>Deselect All</li><li>Select history</li></ol><p>You can then download your YouTube data after it is generated and a link sent to you. You should get a file called <code>watch-history.json</code> that we&rsquo;ll be making use of in future steps.</p><h3 id=data-preparation>Data Preparation</h3><p>We can take a look at the JSON and see what there is:</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>json</span>
+<span class=kn>import</span> <span class=nn>pandas</span> <span class=kn>as</span> <span class=nn>pd</span>
 
-        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
-    <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="oliver.yh"><span class="header-title-pre"><img src="/black-on-white-256x256.png" style="vertical-align: middle; margin-right: 8px; margin-bottom: 4px; height: 32px" alt="Italian Trulli"></span>oliver.yh</a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                    <i class="fas fa-adjust fa-fw"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/" title="oliver.yh"><span class="header-title-pre"><img src="/black-on-white-256x256.png" style="vertical-align: middle; margin-right: 8px; margin-bottom: 4px; height: 32px" alt="Italian Trulli"></span>oliver.yh</a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
-                <i class="fas fa-adjust fa-fw"></i>
-            </a></div>
-    </div>
-</header>
-<div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-</div>
-<div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-</div>
-<main class="main">
-                <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">Contents</h2>
-            <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title">Youtube History Visualisation in Plotly</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-category"><a href="/categories/software-engineering/">
-                                <i class="far fa-folder fa-fw"></i>&nbsp;Software Engineering
-                            </a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-05-11>2020-05-11</time>&nbsp;
-                <i class="far fa-clock fa-fw"></i>12 min&nbsp;</div>
-        </div><div class="featured-image"><img
-        class="lazyload"
-        src="/svg/loading/normal.min.svg"
-        data-src="/posts/2020-05-12_youtube-history-visualisation/header_image.png"
-        data-srcset="/posts/2020-05-12_youtube-history-visualisation/header_image.png, /posts/2020-05-12_youtube-history-visualisation/header_image.png 1.5x, /posts/2020-05-12_youtube-history-visualisation/header_image.png 2x"
-        data-sizes="auto"
-        alt="/posts/2020-05-12_youtube-history-visualisation/header_image.png"
-        title="/posts/2020-05-12_youtube-history-visualisation/header_image.png" /></div><div class="details toc" id="toc-static">
-                <div class="details-summary toc-title">
-                    <span>Contents</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#objectives">Objectives</a></li>
-    <li><a href="#preprocessing">Preprocessing</a>
-      <ul>
-        <li><a href="#getting-access-to-youtube-data">Getting access to YouTube Data</a></li>
-        <li><a href="#data-preparation">Data Preparation</a></li>
-        <li><a href="#feature-engineering">Feature Engineering</a></li>
-      </ul>
-    </li>
-    <li><a href="#visualisation">Visualisation</a></li>
-    <li><a href="#conclusion">Conclusion</a></li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><p>The following learning project is intended to help me learn concepts around the steps required to create a visualisation in python, but also explore the kind of information that is stored by companies such as YouTube (Google).</p>
-<h2 id="objectives">Objectives</h2>
-<ul>
-<li><strong>Data Preparation:</strong> Data preparation makes up ~80% of the work in a Data Science pipeline. I&rsquo;d like to explore the best techniques to go from raw CSV data, to a tabular format that is ready for data visualisation.</li>
-<li><strong>Plot:</strong> There are various modules that can be used to plot the data. I&rsquo;ll consider which is best for this use case, and find the best way to represent the data in hand.</li>
-<li><strong>Web Display:</strong> In order to display this project, what is the best way to allow users to upload their YouTube data and display the visualisation such that is can be deployed on a server with minimal effort to others.</li>
-</ul>
-<h2 id="preprocessing">Preprocessing</h2>
-<h3 id="getting-access-to-youtube-data">Getting access to YouTube Data</h3>
-<p>YouTube depricated their history API due to privacy reasons a few years ago, however it&rsquo;s possible to download a copy of your YouTube history in a JSON format by doing the following:</p>
-<ol>
-<li>Go to <a href="https://takeout.google.com/" target="_blank" rel="noopener noreffer">Google Takeout</a></li>
-<li>Deselect All</li>
-<li>Select YouTube</li>
-<li>Underneath YouTube, click on &ldquo;All YouTube Data Included&rdquo;</li>
-<li>Deselect All</li>
-<li>Select history</li>
-</ol>
-<p>You can then download your YouTube data after it is generated and a link sent to you. You should get a file called <code>watch-history.json</code> that we&rsquo;ll be making use of in future steps.</p>
-<h3 id="data-preparation">Data Preparation</h3>
-<p>We can take a look at the JSON and see what there is:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-
-<span class="c1"># Open History File as dataframe</span>
-<span class="nb">file</span> <span class="o">=</span> <span class="s1">&#39;../watch-history.json&#39;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">wh_file</span><span class="p">:</span>
-    <span class="n">wh_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">wh_file</span><span class="p">)</span>
+<span class=c1># Open History File as dataframe</span>
+<span class=nb>file</span> <span class=o>=</span> <span class=s1>&#39;../watch-history.json&#39;</span>
+<span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=nb>file</span><span class=p>,</span> <span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;utf8&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>wh_file</span><span class=p>:</span>
+    <span class=n>wh_dict</span> <span class=o>=</span> <span class=n>json</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>wh_file</span><span class=p>)</span>
     
-<span class="n">wh</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">wh_dict</span><span class="p">)</span>
+<span class=n>wh</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=o>.</span><span class=n>from_dict</span><span class=p>(</span><span class=n>wh_dict</span><span class=p>)</span>
 
-<span class="n">display</span><span class="p">(</span><span class="n">wh</span><span class="p">)</span>
-</code></pre></div><table>
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>description</th>
-      <th>header</th>
-      <th>products</th>
-      <th>subtitles</th>
-      <th>time</th>
-      <th>title</th>
-      <th>titleUrl</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCFK...</td>
-      <td>2019-05-04T15:51:04.397Z</td>
-      <td>Watched Stromae - Papaoutai (Clip Officiel)</td>
-      <td>https://www.youtube.com/watch?v=oiKj0Z_Xnjc</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCbs...</td>
-      <td>2019-05-04T15:16:07.495Z</td>
-      <td>Watched Me My Body And I</td>
-      <td>https://www.youtube.com/watch?v=tCbPpfIGk-s</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCVL...</td>
-      <td>2019-05-04T14:24:33.373Z</td>
-      <td>Watched I Did Peloton For Two Weeks Straight A...</td>
-      <td>https://www.youtube.com/watch?v=erqLKwwZCVE</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCdd...</td>
-      <td>2019-05-04T14:10:05.115Z</td>
-      <td>Watched F8 2019 keynote in 12 minutes</td>
-      <td>https://www.youtube.com/watch?v=UtxPdezclYw</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCw0...</td>
-      <td>2019-05-04T13:56:17.096Z</td>
-      <td>Watched Netflix culture deck via Reed Hastings</td>
-      <td>https://www.youtube.com/watch?v=2fuOs6nJSjY</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCWO...</td>
-      <td>2019-05-04T13:36:24.194Z</td>
-      <td>Watched Tuca &amp; Bertie | Official Trailer [HD] ...</td>
-      <td>https://www.youtube.com/watch?v=ZybYIJtbcu0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCw0...</td>
-      <td>2019-05-04T13:36:04.262Z</td>
-      <td>Watched Netflix Interview (1 of 3): 2018 Cultu...</td>
-      <td>https://www.youtube.com/watch?v=8-4is78UJZ8</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UC7Y...</td>
-      <td>2019-05-03T22:20:56.255Z</td>
-      <td>Watched "You Make Me Sick So Much, Jimmy Carr"...</td>
-      <td>https://www.youtube.com/watch?v=Q8BeTjCjmwQ</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCes...</td>
-      <td>2019-05-03T22:20:08.582Z</td>
-      <td>Watched How to Install a Hidden Kill Switch in...</td>
-      <td>https://www.youtube.com/watch?v=XUhXLsrZiE0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCp0...</td>
-      <td>2019-05-03T22:19:19.939Z</td>
-      <td>Watched John Bradley Doesn’t Know What He Know...</td>
-      <td>https://www.youtube.com/watch?v=qPHlaLti3g0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>9015</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCYu...</td>
-      <td>2013-05-30T13:02:43.993Z</td>
-      <td>Watched Casio hint 5 Normal Probabilities</td>
-      <td>https://www.youtube.com/watch?v=E5LViG-gmMQ</td>
-    </tr>
-    <tr>
-      <th>9016</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCYu...</td>
-      <td>2013-05-30T13:01:22.800Z</td>
-      <td>Watched casio hint 4 Integration q7 p444</td>
-      <td>https://www.youtube.com/watch?v=rVD4WN7k_9Q</td>
-    </tr>
-    <tr>
-      <th>9017</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCYu...</td>
-      <td>2013-05-30T12:56:12.477Z</td>
-      <td>Watched casio hint 3 binomial distribution</td>
-      <td>https://www.youtube.com/watch?v=CqcOXW16xJg</td>
-    </tr>
-    <tr>
-      <th>9018</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCYu...</td>
-      <td>2013-05-30T12:49:49.775Z</td>
-      <td>Watched casio hint 2 unbiased estimates</td>
-      <td>https://www.youtube.com/watch?v=N6kJzxNpUX4</td>
-    </tr>
-    <tr>
-      <th>9019</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCYu...</td>
-      <td>2013-05-30T12:45:31.681Z</td>
-      <td>Watched casio hint 1 graphing</td>
-      <td>https://www.youtube.com/watch?v=8nMi8wdzC00</td>
-    </tr>
-    <tr>
-      <th>9020</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCYu...</td>
-      <td>2013-05-30T12:36:29.574Z</td>
-      <td>Watched Casio hint 9 Contingency Tables</td>
-      <td>https://www.youtube.com/watch?v=Bc3dAcwCNw0</td>
-    </tr>
-    <tr>
-      <th>9021</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>NaN</td>
-      <td>2013-05-30T11:32:30.934Z</td>
-      <td>Watched https://www.youtube.com/watch?v=Pl1UMf...</td>
-      <td>https://www.youtube.com/watch?v=Pl1UMfxa_r4</td>
-    </tr>
-    <tr>
-      <th>9022</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCe8...</td>
-      <td>2013-05-23T19:51:15.893Z</td>
-      <td>Watched Microsoft fails again (1998-2012)</td>
-      <td>https://www.youtube.com/watch?v=2w8rypZQDbg</td>
-    </tr>
-    <tr>
-      <th>9023</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCdd...</td>
-      <td>2013-05-23T19:44:58.295Z</td>
-      <td>Watched Microsoft Surface Keynote</td>
-      <td>https://www.youtube.com/watch?v=jozTK-MqEXQ</td>
-    </tr>
-    <tr>
-      <th>9024</th>
-      <td>NaN</td>
-      <td>YouTube</td>
-      <td>[YouTube]</td>
-      <td>[{'url': 'https://www.youtube.com/channel/UCi8...</td>
-      <td>2013-05-23T16:56:22.071Z</td>
-      <td>Watched Don Jon Official Trailer #1 (2013) - J...</td>
-      <td>https://www.youtube.com/watch?v=6615kYTpOSU</td>
-    </tr>
-  </tbody>
-</table>
-<p>There are some parts we&rsquo;d ike to make use of such as <code>title</code> that show some useful information, and others like <code>titleUrl</code> which in this project, we won&rsquo;t have any use for. First, we can drop everything but <code>title</code> and <code>time</code> as we don&rsquo;t need anything else.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Drop columns except title and time</span>
-<span class="n">wh</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">]]</span>
-</code></pre></div><p>We can see clearly that &ldquo;Watched&rdquo; is being prepended to the <code>title</code> field. Not only this, but where a video has become unavailable, we get a title like &ldquo;Watched <a href="https://www.youtube.com/watch?v=rG5tV7zcl1s%22">https://www.youtube.com/watch?v=rG5tV7zcl1s&quot;</a>. Let&rsquo;s take a look at the percentage of videos that are no longer available in the dataset</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="mi">100</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">wh</span><span class="p">[</span><span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Watched https://www.youtube.com&#39;</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">wh</span><span class="p">)</span>
-<span class="mf">5.473684210526316</span>
-</code></pre></div><p>It&rsquo;s about 5%. Not too bad. Let&rsquo;s remove the prefix &ldquo;Watched&rdquo; from the titles and also drop all the unavailable videos. We&rsquo;ll also remove whitespace and make everything lower case for simplicity.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">string</span>
+<span class=n>display</span><span class=p>(</span><span class=n>wh</span><span class=p>)</span>
+</code></pre></div><table><thead><tr style=text-align:right><th></th><th>description</th><th>header</th><th>products</th><th>subtitles</th><th>time</th><th>title</th><th>titleUrl</th></tr></thead><tbody><tr><th>0</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCFK...</td><td>2019-05-04T15:51:04.397Z</td><td>Watched Stromae - Papaoutai (Clip Officiel)</td><td>https://www.youtube.com/watch?v=oiKj0Z_Xnjc</td></tr><tr><th>1</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCbs...</td><td>2019-05-04T15:16:07.495Z</td><td>Watched Me My Body And I</td><td>https://www.youtube.com/watch?v=tCbPpfIGk-s</td></tr><tr><th>2</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCVL...</td><td>2019-05-04T14:24:33.373Z</td><td>Watched I Did Peloton For Two Weeks Straight A...</td><td>https://www.youtube.com/watch?v=erqLKwwZCVE</td></tr><tr><th>3</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCdd...</td><td>2019-05-04T14:10:05.115Z</td><td>Watched F8 2019 keynote in 12 minutes</td><td>https://www.youtube.com/watch?v=UtxPdezclYw</td></tr><tr><th>4</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCw0...</td><td>2019-05-04T13:56:17.096Z</td><td>Watched Netflix culture deck via Reed Hastings</td><td>https://www.youtube.com/watch?v=2fuOs6nJSjY</td></tr><tr><th>5</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCWO...</td><td>2019-05-04T13:36:24.194Z</td><td>Watched Tuca & Bertie | Official Trailer [HD] ...</td><td>https://www.youtube.com/watch?v=ZybYIJtbcu0</td></tr><tr><th>6</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCw0...</td><td>2019-05-04T13:36:04.262Z</td><td>Watched Netflix Interview (1 of 3): 2018 Cultu...</td><td>https://www.youtube.com/watch?v=8-4is78UJZ8</td></tr><tr><th>7</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UC7Y...</td><td>2019-05-03T22:20:56.255Z</td><td>Watched "You Make Me Sick So Much, Jimmy Carr"...</td><td>https://www.youtube.com/watch?v=Q8BeTjCjmwQ</td></tr><tr><th>8</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCes...</td><td>2019-05-03T22:20:08.582Z</td><td>Watched How to Install a Hidden Kill Switch in...</td><td>https://www.youtube.com/watch?v=XUhXLsrZiE0</td></tr><tr><th>9</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCp0...</td><td>2019-05-03T22:19:19.939Z</td><td>Watched John Bradley Doesn’t Know What He Know...</td><td>https://www.youtube.com/watch?v=qPHlaLti3g0</td></tr><tr><th>...</th><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><th>9015</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCYu...</td><td>2013-05-30T13:02:43.993Z</td><td>Watched Casio hint 5 Normal Probabilities</td><td>https://www.youtube.com/watch?v=E5LViG-gmMQ</td></tr><tr><th>9016</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCYu...</td><td>2013-05-30T13:01:22.800Z</td><td>Watched casio hint 4 Integration q7 p444</td><td>https://www.youtube.com/watch?v=rVD4WN7k_9Q</td></tr><tr><th>9017</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCYu...</td><td>2013-05-30T12:56:12.477Z</td><td>Watched casio hint 3 binomial distribution</td><td>https://www.youtube.com/watch?v=CqcOXW16xJg</td></tr><tr><th>9018</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCYu...</td><td>2013-05-30T12:49:49.775Z</td><td>Watched casio hint 2 unbiased estimates</td><td>https://www.youtube.com/watch?v=N6kJzxNpUX4</td></tr><tr><th>9019</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCYu...</td><td>2013-05-30T12:45:31.681Z</td><td>Watched casio hint 1 graphing</td><td>https://www.youtube.com/watch?v=8nMi8wdzC00</td></tr><tr><th>9020</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCYu...</td><td>2013-05-30T12:36:29.574Z</td><td>Watched Casio hint 9 Contingency Tables</td><td>https://www.youtube.com/watch?v=Bc3dAcwCNw0</td></tr><tr><th>9021</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>NaN</td><td>2013-05-30T11:32:30.934Z</td><td>Watched https://www.youtube.com/watch?v=Pl1UMf...</td><td>https://www.youtube.com/watch?v=Pl1UMfxa_r4</td></tr><tr><th>9022</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCe8...</td><td>2013-05-23T19:51:15.893Z</td><td>Watched Microsoft fails again (1998-2012)</td><td>https://www.youtube.com/watch?v=2w8rypZQDbg</td></tr><tr><th>9023</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCdd...</td><td>2013-05-23T19:44:58.295Z</td><td>Watched Microsoft Surface Keynote</td><td>https://www.youtube.com/watch?v=jozTK-MqEXQ</td></tr><tr><th>9024</th><td>NaN</td><td>YouTube</td><td>[YouTube]</td><td>[{'url': 'https://www.youtube.com/channel/UCi8...</td><td>2013-05-23T16:56:22.071Z</td><td>Watched Don Jon Official Trailer #1 (2013) - J...</td><td>https://www.youtube.com/watch?v=6615kYTpOSU</td></tr></tbody></table><p>There are some parts we&rsquo;d ike to make use of such as <code>title</code> that show some useful information, and others like <code>titleUrl</code> which in this project, we won&rsquo;t have any use for. First, we can drop everything but <code>title</code> and <code>time</code> as we don&rsquo;t need anything else.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=c1># Drop columns except title and time</span>
+<span class=n>wh</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[[</span><span class=s1>&#39;title&#39;</span><span class=p>,</span> <span class=s1>&#39;time&#39;</span><span class=p>]]</span>
+</code></pre></div><p>We can see clearly that &ldquo;Watched&rdquo; is being prepended to the <code>title</code> field. Not only this, but where a video has become unavailable, we get a title like &ldquo;Watched <a href="https://www.youtube.com/watch?v=rG5tV7zcl1s%22">https://www.youtube.com/watch?v=rG5tV7zcl1s"</a>. Let&rsquo;s take a look at the percentage of videos that are no longer available in the dataset</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=mi>100</span> <span class=o>*</span> <span class=nb>len</span><span class=p>(</span><span class=n>wh</span><span class=p>[</span><span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>str</span><span class=o>.</span><span class=n>startswith</span><span class=p>(</span><span class=s1>&#39;Watched https://www.youtube.com&#39;</span><span class=p>)])</span> <span class=o>/</span> <span class=nb>len</span><span class=p>(</span><span class=n>wh</span><span class=p>)</span>
+<span class=mf>5.473684210526316</span>
+</code></pre></div><p>It&rsquo;s about 5%. Not too bad. Let&rsquo;s remove the prefix &ldquo;Watched&rdquo; from the titles and also drop all the unavailable videos. We&rsquo;ll also remove whitespace and make everything lower case for simplicity.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>string</span>
 
-<span class="c1"># Remove &#34;Watched&#34; from title &#34;Watched Cat Video&#34; -&gt; &#34;Cat Video&#34;</span>
-<span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">7</span><span class="p">:])</span>
+<span class=c1># Remove &#34;Watched&#34; from title &#34;Watched Cat Video&#34; -&gt; &#34;Cat Video&#34;</span>
+<span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=n>x</span><span class=p>[</span><span class=mi>7</span><span class=p>:])</span>
 
-<span class="c1"># Remove Unavailable videos</span>
-<span class="n">wh</span> <span class="o">=</span> <span class="n">wh</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">wh</span><span class="p">[</span><span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;https://www.youtube.com&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class=c1># Remove Unavailable videos</span>
+<span class=n>wh</span> <span class=o>=</span> <span class=n>wh</span><span class=o>.</span><span class=n>drop</span><span class=p>(</span><span class=n>wh</span><span class=p>[</span><span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>str</span><span class=o>.</span><span class=n>startswith</span><span class=p>(</span><span class=s1>&#39;https://www.youtube.com&#39;</span><span class=p>)]</span><span class=o>.</span><span class=n>index</span><span class=p>)</span>
 
-<span class="c1"># Lower Case &#34;Cat Video&#34; -&gt; &#34;cat video&#34;</span>
-<span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class=c1># Lower Case &#34;Cat Video&#34; -&gt; &#34;cat video&#34;</span>
+<span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=n>x</span><span class=o>.</span><span class=n>lower</span><span class=p>())</span>
 
-<span class="c1"># Remove whitespace</span>
-<span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-<span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)))</span>
+<span class=c1># Remove whitespace</span>
+<span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=n>x</span><span class=o>.</span><span class=n>strip</span><span class=p>())</span>
+<span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span>
+    <span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=n>x</span><span class=o>.</span><span class=n>translate</span><span class=p>(</span><span class=nb>str</span><span class=o>.</span><span class=n>maketrans</span><span class=p>(</span><span class=s1>&#39; &#39;</span><span class=p>,</span> <span class=s1>&#39; &#39;</span><span class=p>,</span> <span class=n>string</span><span class=o>.</span><span class=n>punctuation</span><span class=p>)))</span>
 
-<span class="n">wh</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</code></pre></div><table>
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>title</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>stromae  papaoutai clip officiel</td>
-      <td>2019-05-04T15:51:04.397Z</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>me my body and i</td>
-      <td>2019-05-04T15:16:07.495Z</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>i did peloton for two weeks straight and here’...</td>
-      <td>2019-05-04T14:24:33.373Z</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>f8 2019 keynote in 12 minutes</td>
-      <td>2019-05-04T14:10:05.115Z</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>netflix culture deck via reed hastings</td>
-      <td>2019-05-04T13:56:17.096Z</td>
-    </tr>
-  </tbody>
-</table>
-<p>We only want the date from the <code>time</code> field, as the time is too granular for this particular visualisation. Let&rsquo;s convert this attribute to just contain a <code>datetime</code> object with the date</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
+<span class=n>wh</span><span class=o>.</span><span class=n>head</span><span class=p>()</span>
+</code></pre></div><table><thead><tr style=text-align:right><th></th><th>title</th><th>time</th></tr></thead><tbody><tr><th>0</th><td>stromae papaoutai clip officiel</td><td>2019-05-04T15:51:04.397Z</td></tr><tr><th>1</th><td>me my body and i</td><td>2019-05-04T15:16:07.495Z</td></tr><tr><th>2</th><td>i did peloton for two weeks straight and here’...</td><td>2019-05-04T14:24:33.373Z</td></tr><tr><th>3</th><td>f8 2019 keynote in 12 minutes</td><td>2019-05-04T14:10:05.115Z</td></tr><tr><th>4</th><td>netflix culture deck via reed hastings</td><td>2019-05-04T13:56:17.096Z</td></tr></tbody></table><p>We only want the date from the <code>time</code> field, as the time is too granular for this particular visualisation. Let&rsquo;s convert this attribute to just contain a <code>datetime</code> object with the date</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>datetime</span> <span class=kn>as</span> <span class=nn>dt</span>
 
-<span class="k">def</span> <span class="nf">get_date</span><span class="p">(</span><span class="n">datetime_str</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">datetime_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class=k>def</span> <span class=nf>get_date</span><span class=p>(</span><span class=n>datetime_str</span><span class=p>):</span>
+    <span class=k>return</span> <span class=n>dt</span><span class=o>.</span><span class=n>datetime</span><span class=o>.</span><span class=n>strptime</span><span class=p>(</span><span class=n>datetime_str</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;T&#39;</span><span class=p>)[</span><span class=mi>0</span><span class=p>],</span> <span class=s1>&#39;%Y-%m-</span><span class=si>%d</span><span class=s1>&#39;</span><span class=p>)</span>
 
-<span class="n">wh</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_date</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class=n>wh</span><span class=p>[</span><span class=s1>&#39;time&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;time&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=n>get_date</span><span class=p>(</span><span class=n>x</span><span class=p>))</span>
 
-<span class="n">wh</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</code></pre></div><table>
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>title</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>stromae  papaoutai clip officiel</td>
-      <td>2019-05-04</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>me my body and i</td>
-      <td>2019-05-04</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>i did peloton for two weeks straight and here’...</td>
-      <td>2019-05-04</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>f8 2019 keynote in 12 minutes</td>
-      <td>2019-05-04</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>netflix culture deck via reed hastings</td>
-      <td>2019-05-04</td>
-    </tr>
-  </tbody>
-</table>
-<h3 id="feature-engineering">Feature Engineering</h3>
-<p>Now we have the dataframe with the important information from the original history JSON we downloaded. We&rsquo;re now going to add the following features in order to get a better representation of the data. We have a large collection of titles, but the title &ldquo;Body Workout Exercise&rdquo; and &ldquo;Full Body Workout&rdquo; have very similar themes, but are treated as distinct occurances unless we find some way to group entries with similar themes. We need a way to:</p>
-<ul>
-<li>Extract key themes from a video title</li>
-<li>Find other videos that have this theme</li>
-</ul>
-<h4 id="keyword-analysis">Keyword Analysis</h4>
-<p>In order to get aggregated meaning of the titles, we can look at the keywords in the titles.</p>
-<h5 id="tokenizing">Tokenizing</h5>
-<p>We could find the distribution of keywords such as &ldquo;XBOX&rdquo; or &ldquo;Full-body Workout&rdquo; over the range of the dataset. Notice that keywords could appear in the form of unigrams (one word) or bigrams (two words together) such as the latter example. We also want to remove stop words such as &ldquo;and&rdquo; and &ldquo;with&rdquo; in our tokens, as these won&rsquo;t provide any additional value to this example.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class=n>wh</span><span class=o>.</span><span class=n>head</span><span class=p>()</span>
+</code></pre></div><table><thead><tr style=text-align:right><th></th><th>title</th><th>time</th></tr></thead><tbody><tr><th>0</th><td>stromae papaoutai clip officiel</td><td>2019-05-04</td></tr><tr><th>1</th><td>me my body and i</td><td>2019-05-04</td></tr><tr><th>2</th><td>i did peloton for two weeks straight and here’...</td><td>2019-05-04</td></tr><tr><th>3</th><td>f8 2019 keynote in 12 minutes</td><td>2019-05-04</td></tr><tr><th>4</th><td>netflix culture deck via reed hastings</td><td>2019-05-04</td></tr></tbody></table><h3 id=feature-engineering>Feature Engineering</h3><p>Now we have the dataframe with the important information from the original history JSON we downloaded. We&rsquo;re now going to add the following features in order to get a better representation of the data. We have a large collection of titles, but the title &ldquo;Body Workout Exercise&rdquo; and &ldquo;Full Body Workout&rdquo; have very similar themes, but are treated as distinct occurances unless we find some way to group entries with similar themes. We need a way to:</p><ul><li>Extract key themes from a video title</li><li>Find other videos that have this theme</li></ul><h4 id=keyword-analysis>Keyword Analysis</h4><p>In order to get aggregated meaning of the titles, we can look at the keywords in the titles.</p><h5 id=tokenizing>Tokenizing</h5><p>We could find the distribution of keywords such as &ldquo;XBOX&rdquo; or &ldquo;Full-body Workout&rdquo; over the range of the dataset. Notice that keywords could appear in the form of unigrams (one word) or bigrams (two words together) such as the latter example. We also want to remove stop words such as &ldquo;and&rdquo; and &ldquo;with&rdquo; in our tokens, as these won&rsquo;t provide any additional value to this example.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>nltk</span>
+<span class=kn>from</span> <span class=nn>nltk.corpus</span> <span class=kn>import</span> <span class=n>stopwords</span>
 
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
-<span class="n">stop_words</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class=n>nltk</span><span class=o>.</span><span class=n>download</span><span class=p>(</span><span class=s1>&#39;stopwords&#39;</span><span class=p>)</span>
+<span class=n>stop_words</span> <span class=o>=</span> <span class=n>stopwords</span><span class=o>.</span><span class=n>words</span><span class=p>(</span><span class=s1>&#39;english&#39;</span><span class=p>)</span>
 
-<span class="k">def</span> <span class="nf">find_ngrams</span><span class="p">(</span><span class="n">input_list</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">input_list</span>
+<span class=k>def</span> <span class=nf>find_ngrams</span><span class=p>(</span><span class=n>input_list</span><span class=p>,</span> <span class=n>n</span><span class=p>):</span>
+    <span class=k>if</span> <span class=n>n</span> <span class=o>&gt;</span> <span class=mi>1</span><span class=p>:</span>
+        <span class=k>return</span> <span class=nb>zip</span><span class=p>(</span><span class=o>*</span><span class=p>(</span><span class=n>input_list</span><span class=p>[</span><span class=n>i</span><span class=p>:]</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>n</span><span class=p>)))</span>
+    <span class=k>else</span><span class=p>:</span>
+        <span class=k>return</span> <span class=n>input_list</span>
 
-<span class="c1"># Split words and remove stopwords</span>
-<span class="n">wh</span><span class="p">[</span><span class="s1">&#39;unigrams&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span> <span class="ow">and</span> <span class="n">word</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">])</span>
-<span class="n">wh</span><span class="p">[</span><span class="s1">&#39;bigrams&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;unigrams&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">find_ngrams</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
-<span class="n">wh</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</code></pre></div><table>
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>title</th>
-      <th>time</th>
-      <th>unigrams</th>
-      <th>bigrams</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>stromae  papaoutai clip officiel</td>
-      <td>2019-05-04</td>
-      <td>[stromae, papaoutai, clip, officiel]</td>
-      <td>[(stromae, papaoutai), (papaoutai, clip), (cli...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>me my body and i</td>
-      <td>2019-05-04</td>
-      <td>[body]</td>
-      <td>[]</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>i did peloton for two weeks straight and here’...</td>
-      <td>2019-05-04</td>
-      <td>[peloton, two, weeks, straight, here’s, happened]</td>
-      <td>[(peloton, two), (two, weeks), (weeks, straigh...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>f8 2019 keynote in 12 minutes</td>
-      <td>2019-05-04</td>
-      <td>[f8, 2019, keynote, 12, minutes]</td>
-      <td>[(f8, 2019), (2019, keynote), (keynote, 12), (...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>netflix culture deck via reed hastings</td>
-      <td>2019-05-04</td>
-      <td>[netflix, culture, deck, via, reed, hastings]</td>
-      <td>[(netflix, culture), (culture, deck), (deck, v...</td>
-    </tr>
-  </tbody>
-</table>
-<p>By creating a bag of words, we can explore the frequency of the unigrams and bigrams that are appearing in the dataset.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class=c1># Split words and remove stopwords</span>
+<span class=n>wh</span><span class=p>[</span><span class=s1>&#39;unigrams&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;title&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=p>[</span><span class=n>word</span> <span class=k>for</span> <span class=n>word</span> <span class=ow>in</span> <span class=n>x</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39; &#39;</span><span class=p>)</span> <span class=k>if</span> <span class=n>word</span> <span class=ow>not</span> <span class=ow>in</span> <span class=n>stop_words</span> <span class=ow>and</span> <span class=n>word</span> <span class=o>!=</span> <span class=s1>&#39;&#39;</span><span class=p>])</span>
+<span class=n>wh</span><span class=p>[</span><span class=s1>&#39;bigrams&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;unigrams&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=nb>list</span><span class=p>(</span><span class=n>find_ngrams</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=mi>2</span><span class=p>)))</span>
+<span class=n>wh</span><span class=o>.</span><span class=n>head</span><span class=p>()</span>
+</code></pre></div><table><thead><tr style=text-align:right><th></th><th>title</th><th>time</th><th>unigrams</th><th>bigrams</th></tr></thead><tbody><tr><th>0</th><td>stromae papaoutai clip officiel</td><td>2019-05-04</td><td>[stromae, papaoutai, clip, officiel]</td><td>[(stromae, papaoutai), (papaoutai, clip), (cli...</td></tr><tr><th>1</th><td>me my body and i</td><td>2019-05-04</td><td>[body]</td><td>[]</td></tr><tr><th>2</th><td>i did peloton for two weeks straight and here’...</td><td>2019-05-04</td><td>[peloton, two, weeks, straight, here’s, happened]</td><td>[(peloton, two), (two, weeks), (weeks, straigh...</td></tr><tr><th>3</th><td>f8 2019 keynote in 12 minutes</td><td>2019-05-04</td><td>[f8, 2019, keynote, 12, minutes]</td><td>[(f8, 2019), (2019, keynote), (keynote, 12), (...</td></tr><tr><th>4</th><td>netflix culture deck via reed hastings</td><td>2019-05-04</td><td>[netflix, culture, deck, via, reed, hastings]</td><td>[(netflix, culture), (culture, deck), (deck, v...</td></tr></tbody></table><p>By creating a bag of words, we can explore the frequency of the unigrams and bigrams that are appearing in the dataset.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>collections</span> <span class=kn>import</span> <span class=n>Counter</span>
 
-<span class="c1"># Create N-Gram Counters</span>
-<span class="k">def</span> <span class="nf">get_counter_from_column</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column_name</span><span class="p">):</span>
-    <span class="n">ct</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">column_name</span><span class="p">]:</span>
-        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
-            <span class="n">ct</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">ct</span>
+<span class=c1># Create N-Gram Counters</span>
+<span class=k>def</span> <span class=nf>get_counter_from_column</span><span class=p>(</span><span class=n>df</span><span class=p>,</span> <span class=n>column_name</span><span class=p>):</span>
+    <span class=n>ct</span> <span class=o>=</span> <span class=n>Counter</span><span class=p>()</span>
+    <span class=k>for</span> <span class=n>row</span> <span class=ow>in</span> <span class=n>df</span><span class=p>[</span><span class=n>column_name</span><span class=p>]:</span>
+        <span class=k>for</span> <span class=n>element</span> <span class=ow>in</span> <span class=n>row</span><span class=p>:</span>
+            <span class=n>ct</span><span class=p>[</span><span class=n>element</span><span class=p>]</span> <span class=o>+=</span> <span class=mi>1</span>
+    <span class=k>return</span> <span class=n>ct</span>
 
-<span class="n">bag_1</span> <span class="o">=</span> <span class="n">get_counter_from_column</span><span class="p">(</span><span class="n">wh</span><span class="p">,</span> <span class="s1">&#39;unigrams&#39;</span><span class="p">)</span>
-<span class="n">bag_2</span> <span class="o">=</span> <span class="n">get_counter_from_column</span><span class="p">(</span><span class="n">wh</span><span class="p">,</span> <span class="s1">&#39;bigrams&#39;</span><span class="p">)</span>
+<span class=n>bag_1</span> <span class=o>=</span> <span class=n>get_counter_from_column</span><span class=p>(</span><span class=n>wh</span><span class=p>,</span> <span class=s1>&#39;unigrams&#39;</span><span class=p>)</span>
+<span class=n>bag_2</span> <span class=o>=</span> <span class=n>get_counter_from_column</span><span class=p>(</span><span class=n>wh</span><span class=p>,</span> <span class=s1>&#39;bigrams&#39;</span><span class=p>)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Bag 1</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">bag_1</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Bag 2</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">bag_2</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class=k>print</span><span class=p>(</span><span class=s2>&#34;Bag 1</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>bag_1</span><span class=o>.</span><span class=n>most_common</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
+<span class=k>print</span><span class=p>(</span><span class=s2>&#34;Bag 2</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>,</span> <span class=n>bag_2</span><span class=o>.</span><span class=n>most_common</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>
 </code></pre></div><pre><code>Bag 1
 [('video', 811), ('official', 606), ('trailer', 283), ('removed', 239), ('music', 218), ('1', 205), ('2', 196), ('hd', 190), ('life', 176), ('vs', 173)]
 Bag 2
 [(('video', 'removed'), 239), (('official', 'video'), 209), (('music', 'video'), 154), (('official', 'music'), 137), (('official', 'trailer'), 135), (('movie', 'hd'), 53), (('trailer', '1'), 53), (('trailer', 'hd'), 43), (('glass', 'animals'), 43), (('part', '1'), 42)]
-</code></pre>
-<h5 id="combine-pluralisms">Combine Pluralisms</h5>
-<p>We can see from the following code snippet that a singular word&rsquo;s plural can appear in the bag of words together. Semantically they mean the same thing, therefore we should find a way to combine these instances. In this example, we&rsquo;re taking every regular noun (You just have to add s to pluralise) that has both an occurence of itself and its plural in our unigrams. We then pick one of these with the most occurances and then replace this in both the bag of words and the dataset we&rsquo;re going to use to visualise the data.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;movies: {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bag_1</span><span class="p">[</span><span class="s1">&#39;movies&#39;</span><span class="p">]))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;movie: {}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bag_1</span><span class="p">[</span><span class="s1">&#39;movie&#39;</span><span class="p">]))</span>
+</code></pre><h5 id=combine-pluralisms>Combine Pluralisms</h5><p>We can see from the following code snippet that a singular word&rsquo;s plural can appear in the bag of words together. Semantically they mean the same thing, therefore we should find a way to combine these instances. In this example, we&rsquo;re taking every regular noun (You just have to add s to pluralise) that has both an occurence of itself and its plural in our unigrams. We then pick one of these with the most occurances and then replace this in both the bag of words and the dataset we&rsquo;re going to use to visualise the data.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=k>print</span><span class=p>(</span><span class=s2>&#34;movies: {}&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>bag_1</span><span class=p>[</span><span class=s1>&#39;movies&#39;</span><span class=p>]))</span>
+<span class=k>print</span><span class=p>(</span><span class=s2>&#34;movie: {}&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>bag_1</span><span class=p>[</span><span class=s1>&#39;movie&#39;</span><span class=p>]))</span>
 </code></pre></div><pre><code>movies: 8
 movie: 105
-</code></pre>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Pick singular or plural for most common 500 words</span>
-<span class="k">def</span> <span class="nf">replace_count</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">removed</span><span class="p">,</span> <span class="n">added</span><span class="p">):</span>
-    <span class="n">counter</span><span class="p">[</span><span class="n">added</span><span class="p">]</span> <span class="o">+=</span> <span class="n">counter</span><span class="p">[</span><span class="n">removed</span><span class="p">]</span>
-    <span class="k">del</span> <span class="n">counter</span><span class="p">[</span><span class="n">removed</span><span class="p">]</span>
+</code></pre><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=c1># Pick singular or plural for most common 500 words</span>
+<span class=k>def</span> <span class=nf>replace_count</span><span class=p>(</span><span class=n>counter</span><span class=p>,</span> <span class=n>removed</span><span class=p>,</span> <span class=n>added</span><span class=p>):</span>
+    <span class=n>counter</span><span class=p>[</span><span class=n>added</span><span class=p>]</span> <span class=o>+=</span> <span class=n>counter</span><span class=p>[</span><span class=n>removed</span><span class=p>]</span>
+    <span class=k>del</span> <span class=n>counter</span><span class=p>[</span><span class=n>removed</span><span class=p>]</span>
     
-<span class="n">remove_words</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">bag_1</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
-        <span class="n">singular</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">plural</span> <span class="o">=</span> <span class="n">word</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">singular</span> <span class="o">=</span> <span class="n">word</span>
-        <span class="n">plural</span> <span class="o">=</span> <span class="n">word</span> <span class="o">+</span> <span class="s1">&#39;s&#39;</span>
-    <span class="k">if</span> <span class="n">plural</span> <span class="ow">in</span> <span class="n">bag_1</span> <span class="ow">and</span> <span class="n">singular</span> <span class="ow">in</span> <span class="n">bag_1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">bag_1</span><span class="p">[</span><span class="n">plural</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">bag_1</span><span class="p">[</span><span class="n">singular</span><span class="p">]:</span>
-            <span class="n">remove_words</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">singular</span><span class="p">,</span> <span class="n">plural</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">remove_words</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">plural</span><span class="p">,</span> <span class="n">singular</span><span class="p">))</span>
+<span class=n>remove_words</span> <span class=o>=</span> <span class=p>[]</span>
+<span class=k>for</span> <span class=n>word</span> <span class=ow>in</span> <span class=n>bag_1</span><span class=o>.</span><span class=n>most_common</span><span class=p>(</span><span class=mi>1000</span><span class=p>):</span>
+    <span class=n>word</span> <span class=o>=</span> <span class=n>word</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+    <span class=k>if</span> <span class=n>word</span><span class=o>.</span><span class=n>endswith</span><span class=p>(</span><span class=s1>&#39;s&#39;</span><span class=p>):</span>
+        <span class=n>singular</span> <span class=o>=</span> <span class=n>word</span><span class=p>[:</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>
+        <span class=n>plural</span> <span class=o>=</span> <span class=n>word</span>
+    <span class=k>else</span><span class=p>:</span>
+        <span class=n>singular</span> <span class=o>=</span> <span class=n>word</span>
+        <span class=n>plural</span> <span class=o>=</span> <span class=n>word</span> <span class=o>+</span> <span class=s1>&#39;s&#39;</span>
+    <span class=k>if</span> <span class=n>plural</span> <span class=ow>in</span> <span class=n>bag_1</span> <span class=ow>and</span> <span class=n>singular</span> <span class=ow>in</span> <span class=n>bag_1</span><span class=p>:</span>
+        <span class=k>if</span> <span class=n>bag_1</span><span class=p>[</span><span class=n>plural</span><span class=p>]</span> <span class=o>&gt;=</span> <span class=n>bag_1</span><span class=p>[</span><span class=n>singular</span><span class=p>]:</span>
+            <span class=n>remove_words</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>singular</span><span class=p>,</span> <span class=n>plural</span><span class=p>))</span>
+        <span class=k>else</span><span class=p>:</span>
+            <span class=n>remove_words</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>plural</span><span class=p>,</span> <span class=n>singular</span><span class=p>))</span>
 
-<span class="k">for</span> <span class="p">(</span><span class="n">removed</span><span class="p">,</span> <span class="n">added</span><span class="p">)</span> <span class="ow">in</span> <span class="n">remove_words</span><span class="p">:</span>
-    <span class="n">replace_count</span><span class="p">(</span><span class="n">bag_1</span><span class="p">,</span> <span class="n">removed</span><span class="p">,</span> <span class="n">added</span><span class="p">)</span>
-    <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;unigrams&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;unigrams&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">added</span> <span class="k">if</span> <span class="n">unigram</span> <span class="o">==</span> <span class="n">removed</span> <span class="k">else</span> <span class="n">unigram</span> <span class="k">for</span> <span class="n">unigram</span> <span class="ow">in</span> <span class="n">x</span><span class="p">])</span>
+<span class=k>for</span> <span class=p>(</span><span class=n>removed</span><span class=p>,</span> <span class=n>added</span><span class=p>)</span> <span class=ow>in</span> <span class=n>remove_words</span><span class=p>:</span>
+    <span class=n>replace_count</span><span class=p>(</span><span class=n>bag_1</span><span class=p>,</span> <span class=n>removed</span><span class=p>,</span> <span class=n>added</span><span class=p>)</span>
+    <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;unigrams&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;unigrams&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=p>[</span><span class=n>added</span> <span class=k>if</span> <span class=n>unigram</span> <span class=o>==</span> <span class=n>removed</span> <span class=k>else</span> <span class=n>unigram</span> <span class=k>for</span> <span class=n>unigram</span> <span class=ow>in</span> <span class=n>x</span><span class=p>])</span>
     
-<span class="n">bag_1</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</code></pre></div><p>Now you can see that for the key unigrams in our dataset, we have picked either the singular form or pluralised form for our regular nouns.</p>
-<pre><code>[('video', 833),
+<span class=n>bag_1</span><span class=o>.</span><span class=n>most_common</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
+</code></pre></div><p>Now you can see that for the key unigrams in our dataset, we have picked either the singular form or pluralised form for our regular nouns.</p><pre><code>[('video', 833),
  ('official', 606),
  ('trailer', 294),
  ('removed', 239),
@@ -606,306 +115,73 @@ movie: 105
  ('music', 218),
  ...
  ('movie', 113)]
-</code></pre>
-<h5 id="duplicates-in-bigrams">Duplicates in bigrams</h5>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">bag_1</span><span class="p">[</span><span class="s1">&#39;glass&#39;</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">bag_1</span><span class="p">[</span><span class="s1">&#39;animals&#39;</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">bag_2</span><span class="p">[(</span><span class="s1">&#39;glass&#39;</span><span class="p">,</span> <span class="s1">&#39;animals&#39;</span><span class="p">)])</span>
+</code></pre><h5 id=duplicates-in-bigrams>Duplicates in bigrams</h5><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=k>print</span><span class=p>(</span><span class=n>bag_1</span><span class=p>[</span><span class=s1>&#39;glass&#39;</span><span class=p>])</span>
+<span class=k>print</span><span class=p>(</span><span class=n>bag_1</span><span class=p>[</span><span class=s1>&#39;animals&#39;</span><span class=p>])</span>
+<span class=k>print</span><span class=p>(</span><span class=n>bag_2</span><span class=p>[(</span><span class=s1>&#39;glass&#39;</span><span class=p>,</span> <span class=s1>&#39;animals&#39;</span><span class=p>)])</span>
 </code></pre></div><pre><code>51
 53
 43
-</code></pre>
-<p>We now also have another problem to address. If we were to combine our unigrams and bigrams now and look at the distributions of each keyword, we&rsquo;d get duplicates. For example the British band &ldquo;Glass Animals&rdquo; appears 43 times. &ldquo;glass&rdquo; and &ldquo;animals&rdquo; occurances are largely contributed by the band&rsquo;s name. If we assume that if a singular word&rsquo;s occurs less than three times much as the respective bigram does, then it&rsquo;s contribution was most likely due to the bigram. Therefore we can remove it. Likewise, if the bigram appears less than a third as many times as the respective unigram, then we can remove it from the dataset.</p>
-<p>While this is more anecdotal, this was able to extract some more of the key bigrams that I knew where in the dataset. Obviously this requires more rigor to have reproducable outcomes for other datasets.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">THRESHOLD</span> <span class="o">=</span> <span class="mf">0.3</span>
-<span class="k">for</span> <span class="n">bigram</span> <span class="ow">in</span> <span class="n">bag_2</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="c1"># print(&#34;{}: {}&#34;.format(bigram[0][0], bag_1[bigram[0][0]] * 0.75))</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">bag_1</span><span class="p">[</span><span class="n">bigram</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">*</span> <span class="n">THRESHOLD</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">bag_2</span><span class="p">[</span><span class="n">bigram</span><span class="p">[</span><span class="mi">0</span><span class="p">]]:</span>
-        <span class="k">del</span> <span class="n">bag_1</span><span class="p">[</span><span class="n">bigram</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">bag_1</span><span class="p">[</span><span class="n">bigram</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span> <span class="o">*</span> <span class="n">THRESHOLD</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">bag_2</span><span class="p">[</span><span class="n">bigram</span><span class="p">[</span><span class="mi">0</span><span class="p">]]:</span>
-            <span class="k">del</span> <span class="n">bag_1</span><span class="p">[</span><span class="n">bigram</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">del</span> <span class="n">bag_2</span><span class="p">[</span><span class="n">bigram</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">bag_1</span><span class="p">[(</span><span class="s1">&#39;video&#39;</span><span class="p">,)])</span>
-<span class="n">wh</span><span class="p">[</span><span class="s1">&#39;ngrams&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;unigrams&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">wh</span><span class="p">[</span><span class="s1">&#39;bigrams&#39;</span><span class="p">]</span>
-<span class="n">bag_1_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">bag_1</span> <span class="o">+</span> <span class="n">bag_2</span><span class="p">)</span>
-</code></pre></div><p>Now that we&rsquo;ve removed a lot of these duplicate themes, we can combine the bag of words as <code>bag_1_2</code></p>
-<h4 id="visualisation-format">Visualisation Format</h4>
-<p>We now have in our <code>bag_1_2</code> a collection of n-grams we&rsquo;d like to investigate in our visulisation. Let&rsquo;s consider taking the most frequent <code>N</code> from this collection, and finding the mean date that they occur. By doing this, we can determine the general time of the year that videos with this feature appeared.</p>
-<p>For this, we need to take a list of datetimes and return the average of those.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">functools</span>
-<span class="kn">import</span> <span class="nn">operator</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
-<span class="k">def</span> <span class="nf">avg_datetime</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
-    <span class="n">dt_min</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-    <span class="n">deltas</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span> <span class="o">-</span> <span class="n">dt_min</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">series</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">deltas</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dt_min</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">,</span> <span class="n">deltas</span><span class="p">)</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">deltas</span><span class="p">))</span>
-</code></pre></div><p>For each of these most common n-grams, let&rsquo;s create a new dataframe that stores the following attributes: <code>{keyword, average datetime, frequency of keyword}</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;keyword&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_datetime&#39;</span><span class="p">,</span> <span class="s1">&#39;freq&#39;</span><span class="p">])</span>
-<span class="k">for</span> <span class="n">ngram</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">bag_1_2</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="n">N</span><span class="p">)):</span>
-    <span class="n">keyword</span> <span class="o">=</span> <span class="n">ngram</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">dates</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[</span><span class="n">wh</span><span class="p">[</span><span class="s1">&#39;ngrams&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="bp">True</span> <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">else</span> <span class="bp">False</span><span class="p">))][</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;keyword&#39;</span><span class="p">:</span> <span class="n">keyword</span> <span class="k">if</span> <span class="nb">isinstance</span> <span class="p">(</span><span class="n">keyword</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&#34; &#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">keyword</span><span class="p">),</span>
-        <span class="s1">&#39;avg_datetime&#39;</span><span class="p">:</span> <span class="n">avg_datetime</span><span class="p">(</span><span class="n">dates</span><span class="p">),</span>
-        <span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span>
-    <span class="p">},</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</code></pre></div><table>
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>keyword</th>
-      <th>avg_datetime</th>
-      <th>freq</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>video</td>
-      <td>2016-08-17</td>
-      <td>825</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>removed</td>
-      <td>2015-11-23</td>
-      <td>239</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>new</td>
-      <td>2017-04-05</td>
-      <td>212</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>official video</td>
-      <td>2016-10-05</td>
-      <td>209</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>2016-09-18</td>
-      <td>198</td>
-    </tr>
-  </tbody>
-</table>
-<p>As you can see, some of the most popular keywords relate to common suffixs of music videos or indications that the video was removed by the uploader. Therefore we&rsquo;ll remove a few different keywords that have no useful meaning such as &ldquo;video&rdquo;, &ldquo;official video&rdquo;, and numbers.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">REMOVALS</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">REMOVALS</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))])</span>
-<span class="n">REMOVALS</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s2">&#34;one&#34;</span><span class="p">,</span> <span class="s2">&#34;two&#34;</span><span class="p">,</span> <span class="s2">&#34;three&#34;</span><span class="p">,</span> <span class="s2">&#34;four&#34;</span><span class="p">,</span> <span class="s2">&#34;five&#34;</span><span class="p">,</span> <span class="s2">&#34;six&#34;</span><span class="p">,</span> <span class="s2">&#34;seven&#34;</span><span class="p">,</span> <span class="s2">&#34;eight&#34;</span><span class="p">,</span> <span class="s2">&#34;nine&#34;</span><span class="p">,</span> <span class="s2">&#34;ten&#34;</span><span class="p">])</span>
-<span class="n">REMOVALS</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s2">&#34;video&#34;</span><span class="p">,</span> <span class="s2">&#34;trailer&#34;</span><span class="p">,</span> <span class="s2">&#34;new&#34;</span><span class="p">,</span> <span class="s2">&#34;best&#34;</span><span class="p">,</span> <span class="s2">&#34;official&#34;</span><span class="p">,</span> <span class="s2">&#34;removed&#34;</span><span class="p">,</span> <span class="s2">&#34;music&#34;</span><span class="p">,</span> <span class="s2">&#34;ft&#34;</span><span class="p">,</span> <span class="s2">&#34;feat&#34;</span><span class="p">])</span>
-<span class="n">REMOVALS</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;official video&#39;</span><span class="p">,</span> <span class="s1">&#39;official trailer&#39;</span><span class="p">,</span> <span class="s1">&#39;music video&#39;</span><span class="p">,</span> <span class="s1">&#39;official music&#39;</span><span class="p">])</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;keyword&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">REMOVALS</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-</code></pre></div><table>
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>keyword</th>
-      <th>avg_datetime</th>
-      <th>freq</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>6</th>
-      <td>vs</td>
-      <td>2016-12-05</td>
-      <td>168</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>hd</td>
-      <td>2015-09-25</td>
-      <td>187</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>day</td>
-      <td>2017-07-18</td>
-      <td>186</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>life</td>
-      <td>2017-05-25</td>
-      <td>175</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>tutorial</td>
-      <td>2017-02-08</td>
-      <td>131</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>2018</td>
-      <td>2018-07-29</td>
-      <td>133</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>time</td>
-      <td>2017-02-22</td>
-      <td>117</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>coldplay</td>
-      <td>2018-01-02</td>
-      <td>109</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>get</td>
-      <td>2017-03-09</td>
-      <td>98</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>google</td>
-      <td>2017-08-16</td>
-      <td>98</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>year</td>
-      <td>2017-09-06</td>
-      <td>98</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>world</td>
-      <td>2016-08-15</td>
-      <td>95</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>94</th>
-      <td>workout</td>
-      <td>2018-01-22</td>
-      <td>44</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>us</td>
-      <td>2017-02-25</td>
-      <td>44</td>
-    </tr>
-    <tr>
-      <th>96</th>
-      <td>top</td>
-      <td>2016-10-01</td>
-      <td>44</td>
-    </tr>
-    <tr>
-      <th>97</th>
-      <td>lets</td>
-      <td>2017-01-19</td>
-      <td>44</td>
-    </tr>
-    <tr>
-      <th>98</th>
-      <td>bad</td>
-      <td>2016-07-13</td>
-      <td>44</td>
-    </tr>
-    <tr>
-      <th>99</th>
-      <td>trailer hd</td>
-      <td>2016-10-05</td>
-      <td>43</td>
-    </tr>
-  </tbody>
-</table>
-<h2 id="visualisation">Visualisation</h2>
-<p>Now that we have the data in the format we want, we can visualise it. Originally I thought that displaying each theme in a scatter graph would be good, however having to hover over each point to see what the theme was wasn&rsquo;t quite so effective. Instead I decided to create a word cloud that had the following design:</p>
-<ul>
-<li>Each word is centered to align with the average occurance of that theme</li>
-<li>The size of the word is proportional to the frequency that the theme occured in the dataset</li>
-</ul>
-<p>I decided to use <a href="https://plot.ly/" target="_blank" rel="noopener noreffer">Plotly</a> for this visualisation as it has great options for going beyond the visualisation in Jupyter. They have a program called Dash that allows you to create interactive dashboards within Python, and their visualisations are serialised in JSON which would make integration with an API easier.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Plot</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">plotly.offline</span> <span class="kn">as</span> <span class="nn">py</span>
-<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="kn">as</span> <span class="nn">go</span>
+</code></pre><p>We now also have another problem to address. If we were to combine our unigrams and bigrams now and look at the distributions of each keyword, we&rsquo;d get duplicates. For example the British band &ldquo;Glass Animals&rdquo; appears 43 times. &ldquo;glass&rdquo; and &ldquo;animals&rdquo; occurances are largely contributed by the band&rsquo;s name. If we assume that if a singular word&rsquo;s occurs less than three times much as the respective bigram does, then it&rsquo;s contribution was most likely due to the bigram. Therefore we can remove it. Likewise, if the bigram appears less than a third as many times as the respective unigram, then we can remove it from the dataset.</p><p>While this is more anecdotal, this was able to extract some more of the key bigrams that I knew where in the dataset. Obviously this requires more rigor to have reproducable outcomes for other datasets.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=n>THRESHOLD</span> <span class=o>=</span> <span class=mf>0.3</span>
+<span class=k>for</span> <span class=n>bigram</span> <span class=ow>in</span> <span class=n>bag_2</span><span class=o>.</span><span class=n>most_common</span><span class=p>(</span><span class=mi>1000</span><span class=p>):</span>
+    <span class=c1># print(&#34;{}: {}&#34;.format(bigram[0][0], bag_1[bigram[0][0]] * 0.75))</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>bag_1</span><span class=p>[</span><span class=n>bigram</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>]]</span> <span class=o>*</span> <span class=n>THRESHOLD</span><span class=p>)</span> <span class=o>&lt;=</span> <span class=n>bag_2</span><span class=p>[</span><span class=n>bigram</span><span class=p>[</span><span class=mi>0</span><span class=p>]]:</span>
+        <span class=k>del</span> <span class=n>bag_1</span><span class=p>[</span><span class=n>bigram</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>]]</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>bag_1</span><span class=p>[</span><span class=n>bigram</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>1</span><span class=p>]]</span> <span class=o>*</span> <span class=n>THRESHOLD</span><span class=p>)</span> <span class=o>&lt;=</span> <span class=n>bag_2</span><span class=p>[</span><span class=n>bigram</span><span class=p>[</span><span class=mi>0</span><span class=p>]]:</span>
+            <span class=k>del</span> <span class=n>bag_1</span><span class=p>[</span><span class=n>bigram</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>1</span><span class=p>]]</span>
+    <span class=k>else</span><span class=p>:</span>
+        <span class=k>del</span> <span class=n>bag_2</span><span class=p>[</span><span class=n>bigram</span><span class=p>[</span><span class=mi>0</span><span class=p>]]</span>
+<span class=k>print</span><span class=p>(</span><span class=n>bag_1</span><span class=p>[(</span><span class=s1>&#39;video&#39;</span><span class=p>,)])</span>
+<span class=n>wh</span><span class=p>[</span><span class=s1>&#39;ngrams&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;unigrams&#39;</span><span class=p>]</span> <span class=o>+</span> <span class=n>wh</span><span class=p>[</span><span class=s1>&#39;bigrams&#39;</span><span class=p>]</span>
+<span class=n>bag_1_2</span> <span class=o>=</span> <span class=p>(</span><span class=n>bag_1</span> <span class=o>+</span> <span class=n>bag_2</span><span class=p>)</span>
+</code></pre></div><p>Now that we&rsquo;ve removed a lot of these duplicate themes, we can combine the bag of words as <code>bag_1_2</code></p><h4 id=visualisation-format>Visualisation Format</h4><p>We now have in our <code>bag_1_2</code> a collection of n-grams we&rsquo;d like to investigate in our visulisation. Let&rsquo;s consider taking the most frequent <code>N</code> from this collection, and finding the mean date that they occur. By doing this, we can determine the general time of the year that videos with this feature appeared.</p><p>For this, we need to take a list of datetimes and return the average of those.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>functools</span>
+<span class=kn>import</span> <span class=nn>operator</span>
+<span class=kn>from</span> <span class=nn>datetime</span> <span class=kn>import</span> <span class=n>timedelta</span>
+<span class=k>def</span> <span class=nf>avg_datetime</span><span class=p>(</span><span class=n>series</span><span class=p>):</span>
+    <span class=n>dt_min</span> <span class=o>=</span> <span class=n>series</span><span class=o>.</span><span class=n>min</span><span class=p>()</span>
+    <span class=n>deltas</span> <span class=o>=</span> <span class=p>[(</span><span class=n>x</span> <span class=o>-</span> <span class=n>dt_min</span><span class=p>)</span><span class=o>.</span><span class=n>days</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=n>series</span><span class=p>]</span>
+    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>deltas</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+        <span class=k>print</span><span class=p>(</span><span class=n>series</span><span class=p>)</span>
+    <span class=k>return</span> <span class=n>dt_min</span> <span class=o>+</span> <span class=n>timedelta</span><span class=p>(</span><span class=n>functools</span><span class=o>.</span><span class=n>reduce</span><span class=p>(</span><span class=n>operator</span><span class=o>.</span><span class=n>add</span><span class=p>,</span> <span class=n>deltas</span><span class=p>)</span> <span class=o>//</span> <span class=nb>len</span><span class=p>(</span><span class=n>deltas</span><span class=p>))</span>
+</code></pre></div><p>For each of these most common n-grams, let&rsquo;s create a new dataframe that stores the following attributes: <code>{keyword, average datetime, frequency of keyword}</code>.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=n>N</span> <span class=o>=</span> <span class=mi>100</span>
+<span class=n>data</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>([],</span> <span class=n>columns</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;keyword&#39;</span><span class=p>,</span> <span class=s1>&#39;avg_datetime&#39;</span><span class=p>,</span> <span class=s1>&#39;freq&#39;</span><span class=p>])</span>
+<span class=k>for</span> <span class=n>ngram</span> <span class=ow>in</span> <span class=nb>list</span><span class=p>(</span><span class=n>bag_1_2</span><span class=o>.</span><span class=n>most_common</span><span class=p>(</span><span class=n>N</span><span class=p>)):</span>
+    <span class=n>keyword</span> <span class=o>=</span> <span class=n>ngram</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+    <span class=n>dates</span> <span class=o>=</span> <span class=n>wh</span><span class=p>[</span><span class=n>wh</span><span class=p>[</span><span class=s1>&#39;ngrams&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span><span class=k>lambda</span> <span class=n>x</span><span class=p>:</span> <span class=p>(</span><span class=bp>True</span> <span class=k>if</span> <span class=n>keyword</span> <span class=ow>in</span> <span class=n>x</span> <span class=k>else</span> <span class=bp>False</span><span class=p>))][</span><span class=s1>&#39;time&#39;</span><span class=p>]</span>
+    <span class=n>data</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>append</span><span class=p>({</span>
+        <span class=s1>&#39;keyword&#39;</span><span class=p>:</span> <span class=n>keyword</span> <span class=k>if</span> <span class=nb>isinstance</span> <span class=p>(</span><span class=n>keyword</span><span class=p>,</span> <span class=nb>str</span><span class=p>)</span> <span class=k>else</span> <span class=s2>&#34; &#34;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>keyword</span><span class=p>),</span>
+        <span class=s1>&#39;avg_datetime&#39;</span><span class=p>:</span> <span class=n>avg_datetime</span><span class=p>(</span><span class=n>dates</span><span class=p>),</span>
+        <span class=s1>&#39;freq&#39;</span><span class=p>:</span> <span class=nb>len</span><span class=p>(</span><span class=n>dates</span><span class=p>)</span>
+    <span class=p>},</span> <span class=n>ignore_index</span><span class=o>=</span><span class=bp>True</span><span class=p>)</span>
+</code></pre></div><table><thead><tr style=text-align:right><th></th><th>keyword</th><th>avg_datetime</th><th>freq</th></tr></thead><tbody><tr><th>0</th><td>video</td><td>2016-08-17</td><td>825</td></tr><tr><th>1</th><td>removed</td><td>2015-11-23</td><td>239</td></tr><tr><th>2</th><td>new</td><td>2017-04-05</td><td>212</td></tr><tr><th>3</th><td>official video</td><td>2016-10-05</td><td>209</td></tr><tr><th>4</th><td>1</td><td>2016-09-18</td><td>198</td></tr></tbody></table><p>As you can see, some of the most popular keywords relate to common suffixs of music videos or indications that the video was removed by the uploader. Therefore we&rsquo;ll remove a few different keywords that have no useful meaning such as &ldquo;video&rdquo;, &ldquo;official video&rdquo;, and numbers.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=n>REMOVALS</span> <span class=o>=</span> <span class=p>[]</span>
+<span class=n>REMOVALS</span><span class=o>.</span><span class=n>extend</span><span class=p>([</span><span class=nb>str</span><span class=p>(</span><span class=n>x</span><span class=p>)</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>list</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=mi>100</span><span class=p>))])</span>
+<span class=n>REMOVALS</span><span class=o>.</span><span class=n>extend</span><span class=p>([</span><span class=s2>&#34;one&#34;</span><span class=p>,</span> <span class=s2>&#34;two&#34;</span><span class=p>,</span> <span class=s2>&#34;three&#34;</span><span class=p>,</span> <span class=s2>&#34;four&#34;</span><span class=p>,</span> <span class=s2>&#34;five&#34;</span><span class=p>,</span> <span class=s2>&#34;six&#34;</span><span class=p>,</span> <span class=s2>&#34;seven&#34;</span><span class=p>,</span> <span class=s2>&#34;eight&#34;</span><span class=p>,</span> <span class=s2>&#34;nine&#34;</span><span class=p>,</span> <span class=s2>&#34;ten&#34;</span><span class=p>])</span>
+<span class=n>REMOVALS</span><span class=o>.</span><span class=n>extend</span><span class=p>([</span><span class=s2>&#34;video&#34;</span><span class=p>,</span> <span class=s2>&#34;trailer&#34;</span><span class=p>,</span> <span class=s2>&#34;new&#34;</span><span class=p>,</span> <span class=s2>&#34;best&#34;</span><span class=p>,</span> <span class=s2>&#34;official&#34;</span><span class=p>,</span> <span class=s2>&#34;removed&#34;</span><span class=p>,</span> <span class=s2>&#34;music&#34;</span><span class=p>,</span> <span class=s2>&#34;ft&#34;</span><span class=p>,</span> <span class=s2>&#34;feat&#34;</span><span class=p>])</span>
+<span class=n>REMOVALS</span><span class=o>.</span><span class=n>extend</span><span class=p>([</span><span class=s1>&#39;official video&#39;</span><span class=p>,</span> <span class=s1>&#39;official trailer&#39;</span><span class=p>,</span> <span class=s1>&#39;music video&#39;</span><span class=p>,</span> <span class=s1>&#39;official music&#39;</span><span class=p>])</span>
+<span class=n>data</span> <span class=o>=</span> <span class=n>data</span><span class=o>.</span><span class=n>drop</span><span class=p>(</span><span class=n>data</span><span class=p>[</span><span class=n>data</span><span class=p>[</span><span class=s1>&#39;keyword&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>isin</span><span class=p>(</span><span class=n>REMOVALS</span><span class=p>)]</span><span class=o>.</span><span class=n>index</span><span class=p>)</span>
+</code></pre></div><table><thead><tr style=text-align:right><th></th><th>keyword</th><th>avg_datetime</th><th>freq</th></tr></thead><tbody><tr><th>6</th><td>vs</td><td>2016-12-05</td><td>168</td></tr><tr><th>7</th><td>hd</td><td>2015-09-25</td><td>187</td></tr><tr><th>8</th><td>day</td><td>2017-07-18</td><td>186</td></tr><tr><th>9</th><td>life</td><td>2017-05-25</td><td>175</td></tr><tr><th>13</th><td>tutorial</td><td>2017-02-08</td><td>131</td></tr><tr><th>15</th><td>2018</td><td>2018-07-29</td><td>133</td></tr><tr><th>17</th><td>time</td><td>2017-02-22</td><td>117</td></tr><tr><th>19</th><td>coldplay</td><td>2018-01-02</td><td>109</td></tr><tr><th>22</th><td>get</td><td>2017-03-09</td><td>98</td></tr><tr><th>23</th><td>google</td><td>2017-08-16</td><td>98</td></tr><tr><th>24</th><td>year</td><td>2017-09-06</td><td>98</td></tr><tr><th>25</th><td>world</td><td>2016-08-15</td><td>95</td></tr><tr><th>...</th><td>...</td><td>...</td><td>...</td></tr><tr><th>94</th><td>workout</td><td>2018-01-22</td><td>44</td></tr><tr><th>95</th><td>us</td><td>2017-02-25</td><td>44</td></tr><tr><th>96</th><td>top</td><td>2016-10-01</td><td>44</td></tr><tr><th>97</th><td>lets</td><td>2017-01-19</td><td>44</td></tr><tr><th>98</th><td>bad</td><td>2016-07-13</td><td>44</td></tr><tr><th>99</th><td>trailer hd</td><td>2016-10-05</td><td>43</td></tr></tbody></table><h2 id=visualisation>Visualisation</h2><p>Now that we have the data in the format we want, we can visualise it. Originally I thought that displaying each theme in a scatter graph would be good, however having to hover over each point to see what the theme was wasn&rsquo;t quite so effective. Instead I decided to create a word cloud that had the following design:</p><ul><li>Each word is centered to align with the average occurance of that theme</li><li>The size of the word is proportional to the frequency that the theme occured in the dataset</li></ul><p>I decided to use <a href=https://plot.ly/ target=_blank rel="noopener noreffer">Plotly</a> for this visualisation as it has great options for going beyond the visualisation in Jupyter. They have a program called Dash that allows you to create interactive dashboards within Python, and their visualisations are serialised in JSON which would make integration with an API easier.</p><div class=highlight><pre class=chroma><code class=language-python data-lang=python><span class=c1># Plot</span>
+<span class=kn>import</span> <span class=nn>random</span>
+<span class=kn>import</span> <span class=nn>plotly.offline</span> <span class=kn>as</span> <span class=nn>py</span>
+<span class=kn>import</span> <span class=nn>plotly.graph_objs</span> <span class=kn>as</span> <span class=nn>go</span>
 
 
-<span class="n">palette</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;darkturquoise&#39;</span><span class="p">,</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="s1">&#39;darkorchid&#39;</span><span class="p">,</span> <span class="s1">&#39;mediumseagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;royalblue&#39;</span><span class="p">,</span> <span class="s1">&#39;saddlebrown&#39;</span><span class="p">,</span> <span class="s1">&#39;tomato&#39;</span><span class="p">]</span>
-<span class="n">plotly_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">palette</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">palette</span><span class="p">))]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+<span class=n>palette</span> <span class=o>=</span> <span class=p>[</span><span class=s1>&#39;darkturquoise&#39;</span><span class=p>,</span> <span class=s1>&#39;darkorange&#39;</span><span class=p>,</span> <span class=s1>&#39;darkorchid&#39;</span><span class=p>,</span> <span class=s1>&#39;mediumseagreen&#39;</span><span class=p>,</span> <span class=s1>&#39;royalblue&#39;</span><span class=p>,</span> <span class=s1>&#39;saddlebrown&#39;</span><span class=p>,</span> <span class=s1>&#39;tomato&#39;</span><span class=p>]</span>
+<span class=n>plotly_colors</span> <span class=o>=</span> <span class=p>[</span><span class=n>palette</span><span class=p>[</span><span class=n>random</span><span class=o>.</span><span class=n>randrange</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>palette</span><span class=p>))]</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>N</span><span class=p>)]</span>
 
-<span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;avg_datetime&#34;</span><span class="p">],</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))],</span>
-    <span class="n">mode</span> <span class="o">=</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;keyword&#34;</span><span class="p">]],</span>
-    <span class="n">opacity</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
-    <span class="n">textfont</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span> <span class="o">//</span> <span class="mf">3.5</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&#34;freq&#34;</span><span class="p">])],</span>
-        <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="n">plotly_colors</span><span class="p">,</span>
-        <span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s2">&#34;&#39;Oswald&#39;, sans-serif&#34;</span>
-    <span class="p">}</span>
-<span class="p">)</span>
+<span class=n>trace</span> <span class=o>=</span> <span class=n>go</span><span class=o>.</span><span class=n>Scatter</span><span class=p>(</span>
+    <span class=n>x</span> <span class=o>=</span> <span class=n>data</span><span class=p>[</span><span class=s2>&#34;avg_datetime&#34;</span><span class=p>],</span>
+    <span class=n>y</span> <span class=o>=</span> <span class=p>[</span><span class=n>random</span><span class=o>.</span><span class=n>uniform</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>data</span><span class=p>))],</span>
+    <span class=n>mode</span> <span class=o>=</span> <span class=s2>&#34;text&#34;</span><span class=p>,</span>
+    <span class=n>text</span> <span class=o>=</span> <span class=p>[</span><span class=n>x</span><span class=o>.</span><span class=n>upper</span><span class=p>()</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=n>data</span><span class=p>[</span><span class=s2>&#34;keyword&#34;</span><span class=p>]],</span>
+    <span class=n>opacity</span><span class=o>=</span><span class=mf>0.75</span><span class=p>,</span>
+    <span class=n>textfont</span><span class=o>=</span><span class=p>{</span>
+        <span class=s1>&#39;size&#39;</span><span class=p>:</span> <span class=p>[</span><span class=n>x</span> <span class=o>//</span> <span class=mf>3.5</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>list</span><span class=p>(</span><span class=n>data</span><span class=p>[</span><span class=s2>&#34;freq&#34;</span><span class=p>])],</span>
+        <span class=s1>&#39;color&#39;</span><span class=p>:</span> <span class=n>plotly_colors</span><span class=p>,</span>
+        <span class=s1>&#39;family&#39;</span><span class=p>:</span> <span class=s2>&#34;&#39;Oswald&#39;, sans-serif&#34;</span>
+    <span class=p>}</span>
+<span class=p>)</span>
 
-<span class="n">plot_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">trace</span><span class="p">]</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">FigureWidget</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">plot_data</span><span class="p">)</span>
-<span class="n">py</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</code></pre></div><p>This generates the following visualisation. You can get a pretty good idea of my taste in music, the games I used to play when I was a teenager, and my recent interests in veganism and politics.</p>
-<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="/posts/2020-05-12_youtube-history-visualisation/youtube-histviz-01.html" height="750" width="100%"></iframe>
-<p><a href="/posts/2020-05-12_youtube-history-visualisation/youtube-histviz-01.html" rel="">View Fullscreen</a></p>
-<p>Similarly I gave it a shot with a friend to see how it might compare with them. As you can see below, they mostly use YouTube to watch comedy and listen to music.</p>
-<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="/posts/2020-05-12_youtube-history-visualisation/youtube-histviz-02.html" height="750" width="100%"></iframe>
-<p><a href="/posts/2020-05-12_youtube-history-visualisation/youtube-histviz-02.html" rel="">View Fullscreen</a></p>
-<h2 id="conclusion">Conclusion</h2>
-<p>This project has allowed me to see how easy it is to take data and visualise it in a meaningful and insightful way. While I have also implemented this as a Dash app, I didn&rsquo;t feel it was done well enough to share, perhaps I&rsquo;ll do so on another project. You can see this implementation in the <a href="https://github.com/oliveryh/youtube-histviz" target="_blank" rel="noopener noreffer">source code</a> though if you like.</p>
-</div><div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>The article was updated on 2020-05-11</span>
-            </div>
-            <div class="post-info-license"></div>
-        </div>
-        <div class="post-info-line">
-            <div class="post-info-md"></div>
-            <div class="post-info-share">
-                <span></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="post-info-more">
-        <section class="post-tags"><a href="/tags/python/"><i class="fas fa-tag fa-fw"></i> python</a>&nbsp;&nbsp;<a href="/tags/visualisation/"><i class="fas fa-tag fa-fw"></i> visualisation</a>&nbsp;&nbsp;<a href="/tags/plotly/"><i class="fas fa-tag fa-fw"></i> plotly</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav"><a href="/posts/hello-world/" class="prev" rel="prev" title="Hello World!"><i class="fas fa-angle-left fa-fw"></i>Hello World!</a></div>
-</div>
-</article></div>
-            </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.69.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.6"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
-        </div>
-    </footer></div>
-
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
-                <i class="fas fa-arrow-up fa-fw"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
-                <i class="fas fa-comment fa-fw"></i>
-            </a>
-        </div><script type="text/javascript">
-    window.config = {"code":{"copyTitle":"Copy to clipboard","maxShownLines":20},"comment":{},"headerMode":{"desktop":"fixed","mobile":"auto"}};
-</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
-</html>
+<span class=n>plot_data</span> <span class=o>=</span> <span class=p>[</span><span class=n>trace</span><span class=p>]</span>
+<span class=n>fig</span> <span class=o>=</span> <span class=n>go</span><span class=o>.</span><span class=n>FigureWidget</span><span class=p>(</span><span class=n>data</span><span class=o>=</span><span class=n>plot_data</span><span class=p>)</span>
+<span class=n>py</span><span class=o>.</span><span class=n>iplot</span><span class=p>(</span><span class=n>fig</span><span class=p>)</span>
+</code></pre></div><p>This generates the following visualisation. You can get a pretty good idea of my taste in music, the games I used to play when I was a teenager, and my recent interests in veganism and politics.</p><iframe id=igraph scrolling=no style=border:none seamless src=/posts/2020-05-12_youtube-history-visualisation/youtube-histviz-01.html height=750 width=100%></iframe><p><a href=/posts/2020-05-12_youtube-history-visualisation/youtube-histviz-01.html rel>View Fullscreen</a></p><p>Similarly I gave it a shot with a friend to see how it might compare with them. As you can see below, they mostly use YouTube to watch comedy and listen to music.</p><iframe id=igraph scrolling=no style=border:none seamless src=/posts/2020-05-12_youtube-history-visualisation/youtube-histviz-02.html height=750 width=100%></iframe><p><a href=/posts/2020-05-12_youtube-history-visualisation/youtube-histviz-02.html rel>View Fullscreen</a></p><h2 id=conclusion>Conclusion</h2><p>This project has allowed me to see how easy it is to take data and visualise it in a meaningful and insightful way. While I have also implemented this as a Dash app, I didn&rsquo;t feel it was done well enough to share, perhaps I&rsquo;ll do so on another project. You can see this implementation in the <a href=https://github.com/oliveryh/youtube-histviz target=_blank rel="noopener noreffer">source code</a> though if you like.</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>The article was updated on 2020-05-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><a href=/tags/python/><i class="fas fa-tag fa-fw"></i>python</a>&nbsp;&nbsp;<a href=/tags/visualisation/><i class="fas fa-tag fa-fw"></i> visualisation</a>&nbsp;&nbsp;<a href=/tags/plotly/><i class="fas fa-tag fa-fw"></i> plotly</a></section><section><span><a href=javascript:void(0); onclick=window.history.back();>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/hello-world/ class=prev rel=prev title="Hello World!"><i class="fas fa-angle-left fa-fw"></i>Hello World!</a>
+<a href=/posts/github-review-visualisation-with-cytoscapejs/ class=next rel=next title="Github Review Visualisation with CytoscapeJS">Github Review Visualisation with CytoscapeJS<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.69.2">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.2.6"><i class="far fa-kiss-wink-heart fa-fw"></i>LoveIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank></a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw"></i></a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw"></i></a></div><script type=text/javascript>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":20},"comment":{},"headerMode":{"desktop":"fixed","mobile":"auto"}};</script><script type=text/javascript src="https://polyfill.io/v3/polyfill.min.js?features=html5shiv%2CElement.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/object-fit-images/ofi.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/js/theme.min.js></script></body></html>

@@ -1,27 +1,9 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>All Posts - oliver.yh</title>
-        <link>/posts/</link>
-        <description>All Posts | oliver.yh</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 11 May 2020 21:48:47 &#43;0100</lastBuildDate><atom:link href="/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Youtube History Visualisation in Plotly</title>
-    <link>/posts/youtube-history-visualisation-in-plotly/</link>
-    <pubDate>Mon, 11 May 2020 21:48:47 &#43;0100</pubDate>
-    <author>Author</author>
-    <guid>/posts/youtube-history-visualisation-in-plotly/</guid>
-    <description><![CDATA[<div class="featured-image">
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - oliver.yh</title><link>/posts/</link><description>All Posts | oliver.yh</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Jun 2022 21:48:47 +0100</lastBuildDate><atom:link href="/posts/" rel="self" type="application/rss+xml"/><item><title>Github Review Visualisation with CytoscapeJS</title><link>/posts/github-review-visualisation-with-cytoscapejs/</link><pubDate>Thu, 02 Jun 2022 21:48:47 +0100</pubDate><author>Author</author><guid>/posts/github-review-visualisation-with-cytoscapejs/</guid><description><![CDATA[<div class="featured-image">
+                <img src="/posts/2022-06-02_github-reviews-visualisation/header_image.png" referrerpolicy="no-referrer">
+            </div>I recently learnt about Conway&rsquo;s Law and thought about examples of where a system is influenced by an organisations structure and vice versa. For many developers we may spend days at a time communicating only through the means of the humble code review. While the choices of who you might get a code review from, and how often, are often dictated by team structures, what about looking from the outside in.]]></description></item><item><title>Youtube History Visualisation in Plotly</title><link>/posts/youtube-history-visualisation-in-plotly/</link><pubDate>Mon, 11 May 2020 21:48:47 +0100</pubDate><author>Author</author><guid>/posts/youtube-history-visualisation-in-plotly/</guid><description><![CDATA[<div class="featured-image">
                 <img src="/posts/2020-05-12_youtube-history-visualisation/header_image.png" referrerpolicy="no-referrer">
             </div>The following learning project is intended to help me learn concepts around the steps required to create a visualisation in python, but also explore the kind of information that is stored by companies such as YouTube (Google).
-Objectives  Data Preparation: Data preparation makes up ~80% of the work in a Data Science pipeline. I&rsquo;d like to explore the best techniques to go from raw CSV data, to a tabular format that is ready for data visualisation.]]></description>
-</item><item>
-    <title>Hello World!</title>
-    <link>/posts/hello-world/</link>
-    <pubDate>Sat, 09 May 2020 22:44:32 &#43;0100</pubDate>
-    <author>Author</author>
-    <guid>/posts/hello-world/</guid>
-    <description><![CDATA[<div class="featured-image">
+Objectives  Data Preparation: Data preparation makes up ~80% of the work in a Data Science pipeline. I&rsquo;d like to explore the best techniques to go from raw CSV data, to a tabular format that is ready for data visualisation.]]></description></item><item><title>Hello World!</title><link>/posts/hello-world/</link><pubDate>Sat, 09 May 2020 22:44:32 +0100</pubDate><author>Author</author><guid>/posts/hello-world/</guid><description><![CDATA[<div class="featured-image">
                 <img src="/posts/2020-05-09_hello-world/header_image.png" referrerpolicy="no-referrer">
             </div>Welcome to my new blog. I&rsquo;ve decided to write this blog as a creative outlet for all the things I&rsquo;m up to at the moment. In doing so, hopefully I can help others to explore similar interests with me, or help them out along the way.
-Thank you for taking a look.]]></description>
-</item></channel>
-</rss>
+Thank you for taking a look.]]></description></item></channel></rss>
